@@ -19,7 +19,7 @@ def generate():
 
     prompt = f"Write a 2-sentence paragraph about why someone is excited to apply for the {role} role at {company}, focusing on their value of {value}."
 
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a helpful assistant that writes professional, enthusiastic job application content."},
