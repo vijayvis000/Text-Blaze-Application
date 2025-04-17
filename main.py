@@ -12,7 +12,7 @@ def generate():
     role = request.args.get("role", "a role") or "a role"
     value = request.args.get("value", "innovation") or "innovation"
 
-    prompt = f"Write a 2-sentence paragraph about why someone is excited to apply for the {role} role at {company}, focusing on their value of {value}."
+    prompt = f"Write a 3 paragraph cover letter about why someone is excited to apply for the {role} role at {company}, focusing on their value of {value}."
 
     try:
         headers = {
