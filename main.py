@@ -23,7 +23,7 @@ def generate():
         }
 
         body = {
-            "model": "deepseek-chat",  # double check model name if this fails
+            "model": "deepseek/deepseek-chat-v3-0324:free",  # double check model name if this fails
             "messages": [
                 {"role": "system", "content": "You are a helpful assistant that writes professional, enthusiastic job application paragraphs."},
                 {"role": "user", "content": prompt}
