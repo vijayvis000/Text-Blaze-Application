@@ -18,12 +18,12 @@ def generate():
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://yourdomain.com",  # Required for OpenRouter usage
+            "HTTP-Referer": "https://yourdomain.com",  # Required by OpenRouter
             "X-Title": "TextBlaze AI Integration"
         }
 
         body = {
-            "model": "deepseek-chat",
+            "model": "deepseek-chat",  # double check model name if this fails
             "messages": [
                 {"role": "system", "content": "You are a helpful assistant that writes professional, enthusiastic job application paragraphs."},
                 {"role": "user", "content": prompt}
@@ -33,12 +33,19 @@ def generate():
         response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=body)
         result = response.json()
 
+        # Print full response for debugging
+        print("OpenRouter Response:", result)
+
+        if "choices" not in result:
+            return jsonify({"text": f"Error from OpenRouter: {result.get('error', 'Unknown error')}"}), 500
+
         text = result['choices'][0]['message']['content'].strip()
         return jsonify({"text": text})
 
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"text": f"An error occurred: {e}"}), 500
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
 
